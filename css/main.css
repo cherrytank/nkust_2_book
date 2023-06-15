@@ -44,9 +44,12 @@ body{
 .bookrack{
     height: 100%;
     width: 100%;
-    padding: 20px 0px;
+    padding: 10px 0px;
 }
 
+.books{
+    margin: 0.4%;
+}
 .bookinfo{
     font-size: 20px;
 }
