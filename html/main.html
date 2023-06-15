@@ -55,7 +55,13 @@
             <input class="form-control me-2" type="search" placeholder="尋找您想要的書" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
-        <button class="btn btn-success" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#loginwindows">Login</button>
+        <button class="btn btn-success" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#loginwindows" id="loginwindows_button">Login</button>
+        <button class="btn btn-success" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#registerindows" id="registerindows_button">register</button>
+        <button class="btn btn-success d-none" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#personal_iocn" id="personal_iocn">My account</button>
+        <button class="btn btn-success d-none" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#registerwindows_success" id="registerindows_success_button">register_success</button>
+        <button class="btn btn-success d-none" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#registerwindows_fail" id="registerwindows_fail_button">registerwindows_fail</button>
+        <button class="btn btn-success d-none" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#loginwindows_success" id="loginwindows_success_button">loginwindows_success</button>
+        <button class="btn btn-success d-none" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#loginwindows_fail" id="loginwindows_fail_button">loginwindows_fail</button>
         </div>
     </div>
 </nav>
@@ -63,28 +69,122 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">登入您的校園帳號</h5>
+          <h5 class="modal-title" id="exampleModalLabel">登入帳號</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <label for="basic-url" class="form-label">電子信箱</label>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="您的NKUST電子信箱" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control" id="login_ID" placeholder="您的電子信箱">
                 <span class="input-group-text" id="basic-addon2">@nkust.edu.tw</span>
               </div>
               
               <label for="basic-url" class="form-label">密碼</label>
               <div class="input-group mb-3">
-                <input type="password" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="您的校務系統密碼">
+                <input type="password" class="form-control" id="login_password" placeholder="您的密碼">
               </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-          <button type="button" class="btn btn-primary">登入</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="login_close">關閉</button>
+          <button type="button" class="btn btn-primary" onclick="login()">登入</button>
         </div>
       </div>
     </div>
+</div>
+<div class="modal fade" id="registerwindows_success" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">註冊成功，請登入</h5>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
   </div>
+  </div>
+</div>
+<div class="modal fade" id="registerwindows_fail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">註冊失敗，帳號無效或已被註冊</h5>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div class="modal fade" id="loginwindows_success" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">登入成功</h5>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div class="modal fade" id="loginwindows_fail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">登入失敗，帳號或密碼錯誤</h5>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div class="modal fade" id="registerindows" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >註冊帳號</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <label for="basic-url" class="form-label">姓名</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="輸入姓名(10字以內)" id="register_name">
+              </div>
+            <label for="basic-url" class="form-label">電子信箱</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="您的學號" aria-label="Recipient's username" aria-describedby="basic-addon2" id="register_email">
+                <span class="input-group-text" id="basic-addon2">@nkust.edu.tw</span>
+              </div>
+              <label for="basic-url" class="form-label">密碼</label>
+              <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="您的密碼(英數小於16)" id="register_password">
+              </div>
+              <label for="basic-url" class="form-label">再次確認密碼</label>
+              <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="再次輸入您的密碼(英數小於16)" id="register_password_check">
+              </div>
+              <label for="basic-url" class="form-label">電話</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="電話號碼" id="register_phone">
+              </div>
+              <label for="basic-url" class="form-label">校區</label>
+              <select class="form-select" aria-label="Default select example" id="register_local">
+                <option selected>請選擇校區</option>
+                <option value="建工校區">建工校區</option>
+                <option value="燕巢校區">燕巢校區</option>
+                <option value="楠梓校區">楠梓校區</option>
+                <option value="旗津校區">旗津校區</option>
+                <option value="第一校區">第一校區</option>
+              </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="register_close">關閉</button>
+          <button type="button" class="btn btn-primary" onclick="register()">註冊</button>
+        </div>
+      </div>
+    </div>
+</div>
 <div class="back container-fluid">
     <div class="topslide">
         <div id="carouselExampleIndicators" class="carousel slide slidebar" data-bs-ride="carousel">
@@ -127,6 +227,7 @@
                 <li class="list-group-item bookinfo">書名:高等會計學</li>
                 <li class="list-group-item bookinfo">作者:Sam</li>
                 <li class="list-group-item bookinfo">價格:$400</li>
+                <li class="list-group-item bookinfo">學院:財務金融學院</li>
                 <li class="list-group-item bookinfo">交易方式:面交</li>
                 </ul>
             </div>
@@ -138,6 +239,7 @@
                 <li class="list-group-item bookinfo">書名:中等會計學</li>
                 <li class="list-group-item bookinfo">作者:Sam</li>
                 <li class="list-group-item bookinfo">價格:$239</li>
+                <li class="list-group-item bookinfo">學院:財務金融學院</li>
                 <li class="list-group-item bookinfo">交易方式:物流</li>
                 </ul>
             </div>
@@ -149,6 +251,7 @@
                 <li class="list-group-item bookinfo">書名:資訊管理</li>
                 <li class="list-group-item bookinfo">作者:Sam</li>
                 <li class="list-group-item bookinfo">價格:$1200</li>
+                <li class="list-group-item bookinfo">學院:財務金融學院</li>
                 <li class="list-group-item bookinfo">交易方式:面交</li>
                 </ul>
             </div>
@@ -160,6 +263,7 @@
                 <li class="list-group-item bookinfo">書名:深度學習</li>
                 <li class="list-group-item bookinfo">作者:Sam</li>
                 <li class="list-group-item bookinfo">價格:$700</li>
+                <li class="list-group-item bookinfo">學院:財務金融學院</li>
                 <li class="list-group-item bookinfo">交易方式:其他</li>
                 </ul>
             </div>
@@ -171,6 +275,7 @@
                 <li class="list-group-item bookinfo">書名:氣液壓學</li>
                 <li class="list-group-item bookinfo">作者:Sam</li>
                 <li class="list-group-item bookinfo">價格:$600</li>
+                <li class="list-group-item bookinfo">學院:財務金融學院</li>
                 <li class="list-group-item bookinfo">交易方式:物流</li>
                 </ul>
             </div>
@@ -182,6 +287,7 @@
                 <li class="list-group-item bookinfo">書名:Essential calculus</li>
                 <li class="list-group-item bookinfo">作者:Sam</li>
                 <li class="list-group-item bookinfo">價格:$1400</li>
+                <li class="list-group-item bookinfo">學院:財務金融學院</li>
                 <li class="list-group-item bookinfo">交易方式:面交</li>
                 </ul>
             </div>
