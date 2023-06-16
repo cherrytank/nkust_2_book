@@ -1,6 +1,7 @@
 <?php
     session_start();
     if($_SESSION['user_id']== NULL){
+        
     }else{
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // 獲取表單數據

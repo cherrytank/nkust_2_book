@@ -1,6 +1,6 @@
 <?php
     // 檢查表單是否提交
-    
+    session_start();
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ID = $_POST["ID"];
         $password = $_POST["password"];
@@ -14,7 +14,6 @@
                     echo "success";
                 }
             }
-            session_start();
             $_SESSION['user_id'] = $ID;
         } else {
             echo "fail";
