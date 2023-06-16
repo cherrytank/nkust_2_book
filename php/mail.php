@@ -1,4 +1,9 @@
 <?php
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 require_once 'loginserver.php';
 session_start();
 $ordernumber=$_GET['ordernumber'];
@@ -16,19 +21,35 @@ if ($result->num_rows > 0) {
         $theowner = $row["theowner"];
     }
 }
-$to = $theowner.'@nkust.edu.tw'; // 收件人的電子郵件地址
-$subject = '你好!有人對您的手書有興趣喔!'; // 郵件主題
-$message = 'http://localhost/nkust_2_book/php/books.php?ordernumber='.$ordernumber; // 郵件內容
+//Load Composer's autoloader
+require '../vendor/autoload.php';
 
-// 設定郵件標頭，指定寄件人和回覆地址
-$headers = 'From: '.$_SESSION['user_id'].'@nkust.edu.tw' . "\r\n" .
-    'Reply-To: '.$_SESSION['user_id'].'@nkust.edu.tw'. "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
 
-// 使用mail()函式發送郵件
-if (mail($to, $subject, $message, $headers)) {
-    echo '郵件已成功發送';
-} else {
-    echo '郵件發送失敗';
+try {
+    //Server settings
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'C109154214@nkust.edu.tw';                     //SMTP username
+    $mail->Password   = 'E125712800';                               //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+    //Recipients
+    $mail->setFrom($theowner.'@nkust.edu.tw', $theowner);
+    $mail->addAddress($_SESSION['user_id'].'@nkust.edu.tw', $_SESSION['user_id']);     //Add a recipient             //Name is optional
+    $mail->addReplyTo($_SESSION['user_id'].'@nkust.edu.tw', $_SESSION['user_id']);
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = 'Hello! Someone is interested in your second-hand books!';
+    $mail->Body    = 'http://localhost/nkust_2_book/php/books.php?ordernumber='.$ordernumber;
+    $mail->AltBody = '感謝您使用服務';
+    $mail->send();
+    echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 ?>
