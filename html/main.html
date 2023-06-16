@@ -27,7 +27,7 @@
             <a class="nav-link active" aria-current="page" href="#">首頁</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">我想賣書</a>
+            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#salebook" id="salebook_button">我想賣書</a>
             </li>
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -62,9 +62,77 @@
         <button class="btn btn-success d-none" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#registerwindows_fail" id="registerwindows_fail_button">registerwindows_fail</button>
         <button class="btn btn-success d-none" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#loginwindows_success" id="loginwindows_success_button">loginwindows_success</button>
         <button class="btn btn-success d-none" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#loginwindows_fail" id="loginwindows_fail_button">loginwindows_fail</button>
+        <button class="btn btn-success d-none" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#salebook_success" id="salebook_success_button">salebook_success_button</button>
+        <button class="btn btn-success d-none" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#salebook_fail" id="salebook_fail_button">salebook_fail_button</button>
+        <button class="btn btn-success d-none" type="submit" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#plaselogin" id="plaselogin_button">plaselogin_button</button>
         </div>
     </div>
 </nav>
+<div class="modal fade" id="salebook" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">我想賣書</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <label for="basic-url" class="form-label">ISBN</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control"  placeholder="ISBN" id="ISBN">
+          </div>
+            
+          <label for="basic-url" class="form-label">書名</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control"  placeholder="bookname" id="bookname">
+          </div>
+
+          <label for="basic-url" class="form-label">作者</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control"  placeholder="author" id="author">
+          </div>
+
+          <label for="basic-url" class="form-label">價格</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control"  placeholder="price" id="price">
+          </div>
+
+          <label for="basic-url" class="form-label">所屬學院</label>
+              <select class="form-select" aria-label="Default select example" id="college">
+                <option selected>請選擇學院</option>
+                <option value="電資學院">電資學院</option>
+                <option value="工學院">工學院</option>
+                <option value="智慧機電學院">智慧機電學院</option>
+                <option value="海事學院">海事學院</option>
+                <option value="水圈學院">水圈學院</option>
+                <option value="商業智慧學院">商業智慧學院</option>
+                <option value="管理學院">管理學院</option>
+                <option value="海洋商務學院">海洋商務學院</option>
+                <option value="財務金融學院">財務金融學院</option>
+                <option value="人文社會學院">人文社會學院</option>
+                <option value="外語學院">外語學院</option>
+                <option value="共同教育學院">共同教育學院</option>
+              </select>
+
+              <label for="basic-url" class="form-label">交易方式</label>
+              <select class="form-select" aria-label="Default select example" id="exchang">
+                <option selected>請選擇交易方式</option>
+                <option value="面交">面交</option>
+                <option value="物流">物流</option>
+                <option value="其他方式">其他方式</option>
+              </select>
+              <label for="basic-url" class="form-label">上傳圖片</label>
+              <form id="uploadForm" enctype="multipart/form-data">
+                <input type="file" name="image" accept="image/*">
+                <input type="submit" value="上傳" onclick="upimg()">
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="salebook_close">關閉</button>
+        <button type="button" class="btn btn-primary" onclick="salebook()">上架販賣</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modal fade" id="loginwindows" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -90,6 +158,30 @@
         </div>
       </div>
     </div>
+</div>
+<div class="modal fade" id="salebook_success" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">上架成功!請留意校園信箱</h5>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div class="modal fade" id="salebook_fail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">上架失敗!請請重新嘗試</h5>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
+  </div>
 </div>
 <div class="modal fade" id="registerwindows_success" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -132,6 +224,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">登入失敗，帳號或密碼錯誤</h5>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div class="modal fade" id="plaselogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">尚未登入，請登入</h5>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
       </div>
@@ -220,80 +324,26 @@
         </div>
     </div>
     <div class="bookrack d-flex align-content-stretch flex-wrap">
-        <a class="a_null books" href="http://127.0.0.1:5500/html/main.html#">
-            <div class="card" style="width: 18rem;">
-                <img src="../accet/1.jpg" class="card-img-top" alt="..." height="250px" width="220px">
+    <?php foreach ($books as $book) { ?>
+      <?php 
+        $imgs = "../accet/image/".$book["img_id"].".jpg";
+      ?>
+        <a class="a_null books" href=" ">
+            <div class="card" style="width: 17rem;">
+                <img class="card-img-top" alt="..." height="250px" width="220px" src= <?=$imgs ?> >
                 <ul class="list-group list-group-flush">
-                <li class="list-group-item bookinfo">書名:高等會計學</li>
-                <li class="list-group-item bookinfo">作者:Sam</li>
-                <li class="list-group-item bookinfo">價格:$400</li>
-                <li class="list-group-item bookinfo">學院:財務金融學院</li>
-                <li class="list-group-item bookinfo">交易方式:面交</li>
+                <li class="list-group-item bookinfo">ISBN:<?php echo $book["ISBN"]; ?></li>
+                <li class="list-group-item bookinfo">書名:<?php echo $book["bookname"]; ?></li>
+                <li class="list-group-item bookinfo">作者:<?php echo $book["author"]; ?></li>
+                <li class="list-group-item bookinfo">價格:$<?php echo $book["price"]; ?></li>
+                <li class="list-group-item bookinfo">學院:<?php echo $book["college"]; ?></li>
+                <li class="list-group-item bookinfo">交易方式:<?php echo $book["exchang"]; ?></li>
                 </ul>
             </div>
         </a>
-        <a class="a_null books" href="http://127.0.0.1:5500/html/main.html#">
-            <div class="card" style="width: 18rem;">
-                <img src="../accet/2.jpg" class="card-img-top" alt="..." height="250px" width="220px">
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item bookinfo">書名:中等會計學</li>
-                <li class="list-group-item bookinfo">作者:Sam</li>
-                <li class="list-group-item bookinfo">價格:$239</li>
-                <li class="list-group-item bookinfo">學院:財務金融學院</li>
-                <li class="list-group-item bookinfo">交易方式:物流</li>
-                </ul>
-            </div>
-        </a>
-        <a class="a_null books" href="http://127.0.0.1:5500/html/main.html#">
-            <div class="card" style="width: 18rem;">
-                <img src="../accet/3.jpg" class="card-img-top" alt="..." height="250px" width="220px">
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item bookinfo">書名:資訊管理</li>
-                <li class="list-group-item bookinfo">作者:Sam</li>
-                <li class="list-group-item bookinfo">價格:$1200</li>
-                <li class="list-group-item bookinfo">學院:財務金融學院</li>
-                <li class="list-group-item bookinfo">交易方式:面交</li>
-                </ul>
-            </div>
-        </a>
-        <a class="a_null books" href="http://127.0.0.1:5500/html/main.html#">
-            <div class="card" style="width: 18rem;">
-                <img src="../accet/4.jpg" class="card-img-top" alt="..." height="250px" width="220px">
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item bookinfo">書名:深度學習</li>
-                <li class="list-group-item bookinfo">作者:Sam</li>
-                <li class="list-group-item bookinfo">價格:$700</li>
-                <li class="list-group-item bookinfo">學院:財務金融學院</li>
-                <li class="list-group-item bookinfo">交易方式:其他</li>
-                </ul>
-            </div>
-        </a>
-        <a class="a_null books" href="http://127.0.0.1:5500/html/main.html#">
-            <div class="card" style="width: 18rem;">
-                <img src="../accet/5.jpg" class="card-img-top" alt="..." height="250px" width="220px">
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item bookinfo">書名:氣液壓學</li>
-                <li class="list-group-item bookinfo">作者:Sam</li>
-                <li class="list-group-item bookinfo">價格:$600</li>
-                <li class="list-group-item bookinfo">學院:財務金融學院</li>
-                <li class="list-group-item bookinfo">交易方式:物流</li>
-                </ul>
-            </div>
-        </a>
-        <a class="a_null books" href="http://127.0.0.1:5500/html/main.html#">
-            <div class="card" style="width: 18rem;">
-                <img src="../accet/6.jpg" class="card-img-top" alt="..." height="250px" width="220px">
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item bookinfo">書名:Essential calculus</li>
-                <li class="list-group-item bookinfo">作者:Sam</li>
-                <li class="list-group-item bookinfo">價格:$1400</li>
-                <li class="list-group-item bookinfo">學院:財務金融學院</li>
-                <li class="list-group-item bookinfo">交易方式:面交</li>
-                </ul>
-            </div>
-        </a>
-        
+        <?php } ?>
     </div>
+  </div>
 </div>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

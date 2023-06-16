@@ -1,5 +1,6 @@
 <?php
     // 檢查表單是否提交
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ID = $_POST["ID"];
         $password = $_POST["password"];
